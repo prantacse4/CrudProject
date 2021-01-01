@@ -1,0 +1,23 @@
+{% extends 'enroll/base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h3 class="alert alert-success">Add New Student</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Name</label>
+                {{ form.name }}
+                <label class="mt-2">Email</label>
+                {{ form.email }}
+                <label class="mt-2">Password</label>
+                {{ form.password }}
+            <button class="btn btn-primary mt-2">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+    
