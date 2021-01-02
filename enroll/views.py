@@ -8,7 +8,12 @@ def add_show(request):
     if request.method == 'POST':
         myform = StudentRegistration(request.POST)
         if myform.is_valid():
-            myform.save(commit=True)
+            nm = myform.cleaned_data['name']
+            em = myform.cleaned_data['email']
+            pw = myform.cleaned_data['password']
+            reg = student(name=nm, email=em, password=pw)
+            reg.save()
+            # myform.save(commit=True)
     else:
         myform = StudentRegistration()
     diction = {'form':myform}
