@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import StudentRegistration
+from .forms import StudentRegistrationUpdate
 from .models import student
 
 # Create your views here.
@@ -16,6 +17,8 @@ def add_show(request):
             reg = student(name=nm, email=em, password=pw)
             reg.save()
             myform = StudentRegistration()
+            return HttpResponseRedirect('/')
+
 
             # myform.save(commit=True)
     else:
@@ -30,16 +33,17 @@ def add_show(request):
 def update(request, id):
     if request.method=='POST':
         u_id = student.objects.get(pk=id)
-        myform = StudentRegistration(request.POST, instance=u_id)
+        myform = StudentRegistrationUpdate(request.POST, instance=u_id)
         if myform.is_valid():
             myform.save(commit=True)
             return HttpResponseRedirect('/')
         
     else:
         u_id = student.objects.get(pk=id)
-        myform = StudentRegistration(instance=u_id)
+        myform = StudentRegistrationUpdate(instance=u_id)
 
-    diction = {'form':myform, 'title':"Update | Student"}
+    singledata = student.objects.get(pk=id)
+    diction = {'form':myform, 'title':"Update | Student", 'studentdata':singledata}
     return render(request, 'enroll/updatestudent.html', context=diction)
 
 
