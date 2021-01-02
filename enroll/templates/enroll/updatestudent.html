@@ -3,6 +3,10 @@
 
 {% block content %}
 <h3 class="alert alert-success">Update Student</h3>
-    
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-info">Update</button><span><a href="{% url 'addshow' %}" class="btn btn-warning ml-2">Back</a></span>
+</form>
 {% endblock content %}
     

@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from .forms import StudentRegistration
 from .models import student
 
 # Create your views here.
 
+
+# Adding Function
 def add_show(request):
     if request.method == 'POST':
         myform = StudentRegistration(request.POST)
@@ -19,5 +21,35 @@ def add_show(request):
     else:
         myform = StudentRegistration()
     studata = student.objects.all()
-    diction = {'form':myform, 'studentdata':studata}
+    diction = {'form':myform, 'studentdata':studata, 'title':"Home"}
     return render(request, 'enroll/addshow.html', context=diction )
+
+
+#Update Data
+
+def update(request, id):
+    if request.method=='POST':
+        u_id = student.objects.get(pk=id)
+        myform = StudentRegistration(request.POST, instance=u_id)
+        if myform.is_valid():
+            myform.save(commit=True)
+            return HttpResponseRedirect('/')
+        
+    else:
+        u_id = student.objects.get(pk=id)
+        myform = StudentRegistration(instance=u_id)
+
+    diction = {'form':myform, 'title':"Update | Student"}
+    return render(request, 'enroll/updatestudent.html', context=diction)
+
+
+
+
+
+    # Deleting Functions
+
+def delete(request,id):
+    if request.method == 'POST':
+        del_id = student.objects.get(pk=id)
+        del_id.delete()
+        return HttpResponseRedirect('/')

@@ -41,7 +41,11 @@
                             <td>{{ data.name }}</td>
                             <td>{{ data.email }}</td>
                             <td>{{ data.password }}</td>
-                            <td><a href="" class="btn btn-warning" >Edit</a><span class="ml-1"><a href="" class="btn btn-danger" >Delete</a></span></td>
+                            <td><a href="{% url 'update_data' data.id %}" class="btn btn-warning" >Edit</a><span class="ml-1">
+                                <form action="{% url 'delete_data' data.id %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger">Delete</button>
+                                </form></td>
                         </tr>
                     {% endfor %}
                         
