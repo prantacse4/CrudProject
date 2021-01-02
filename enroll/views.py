@@ -13,8 +13,11 @@ def add_show(request):
             pw = myform.cleaned_data['password']
             reg = student(name=nm, email=em, password=pw)
             reg.save()
+            myform = StudentRegistration()
+
             # myform.save(commit=True)
     else:
         myform = StudentRegistration()
-    diction = {'form':myform}
+        studata = student.objects.all()
+    diction = {'form':myform, 'studentdata':studata}
     return render(request, 'enroll/addshow.html', context=diction )

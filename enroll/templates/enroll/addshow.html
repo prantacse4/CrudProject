@@ -18,6 +18,42 @@
             </div>
         </form>
     </div>
+    <div class="col-md-8">
+        <h4 class="text-center alert alert-info">Student Data</h4>
+
+        
+        {% if studentdata %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for data in studentdata %}
+                        <tr>
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.email }}</td>
+                            <td>{{ data.password }}</td>
+                            <td><a href="" class="btn btn-warning" >Edit</a><span class="ml-1"><a href="" class="btn btn-danger" >Delete</a></span></td>
+                        </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </table>
+        {% else %}
+        <h4 class="alert alert-warning text-center">No Data Available</h4>
+            
+        {% endif %}
+            
+            
+    </div>
 </div>
 {% endblock content %}
     
