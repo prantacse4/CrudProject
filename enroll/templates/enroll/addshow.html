@@ -1,5 +1,10 @@
 {% extends 'enroll/base.html' %}
 
+{% block homenav %}
+    active
+{% endblock homenav %}
+    
+
 
 {% block content %}
 <div class="row">
@@ -16,12 +21,13 @@
             {% csrf_token %}
             <div class="form-group">
                 <label>Name</label>
-                {{ form.name }}
+                <input type="text" name="name" class="form-control" placeholder="Write Your Name" required>
                 <label class="mt-2">Email</label>
-                {{ form.email }}
+                <input type="email" name="email" class="form-control" placeholder="xyz@email.com" required>
                 <label class="mt-2">Password</label>
-                {{ form.password }}
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
             <button class="btn btn-primary mt-2">Submit</button>
+
             <a href="{% url 'addshow' %}" class="ml-2 mt-2 btn btn-info">Refresh Form</a>
             </div>
         </form>
@@ -45,7 +51,7 @@
                     
                     {% for data in studentdata %}
                         <tr>
-                            <td>{{ data.id }}</td>
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ data.name }}</td>
                             <td>{{ data.email }}</td>
                             <td>{{ data.password }}</td>

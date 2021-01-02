@@ -24,7 +24,8 @@ def add_show(request):
     else:
         myform = StudentRegistration()
     studata = student.objects.all()
-    diction = {'form':myform, 'studentdata':studata, 'title':"Home"}
+    count = student.objects.all().count()
+    diction = {'form':myform, 'studentdata':studata, 'title':"Home", 'count':count}
     return render(request, 'enroll/addshow.html', context=diction )
 
 
