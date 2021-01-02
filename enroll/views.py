@@ -18,6 +18,6 @@ def add_show(request):
             # myform.save(commit=True)
     else:
         myform = StudentRegistration()
-        studata = student.objects.all()
+    studata = student.objects.all()
     diction = {'form':myform, 'studentdata':studata}
     return render(request, 'enroll/addshow.html', context=diction )
